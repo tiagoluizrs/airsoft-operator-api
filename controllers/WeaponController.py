@@ -7,20 +7,28 @@ class WeaponController:
 
         offset = (page - 1) * limit
 
-        weapons = db.session.query(Weapon).limit(limit).offset(offset).all()
-        if len(weapons) > 0:
+        try:
+            weapons = db.session.query(Weapon).limit(limit).offset(offset).all()
+            if len(weapons) > 0:
+                response = {
+                    'status': 200,
+                    'data': [
+                        {
+                            'id': weapon.id,
+                            'name': weapon.name,
+                            'image': weapon.image,
+                            'fps': weapon.fps,
+                            'category': 'Nada',
+                            'brand': 'Nada'
+                        } for weapon in weapons
+                    ],
+                }
+        except Exception as e:
             response = {
-                'status': 200,
-                'data': [
-                    {
-                        'id': weapon.id,
-                        'name': weapon.name,
-                        'image': weapon.image,
-                        'fps': weapon.fps,
-                        'category': 'Nada',
-                        'brand': 'Nada'
-                    } for weapon in weapons
-                ],
+                'status': 500,
+                'msg': str(e)
             }
+        finally:
+            db.session.close()
 
         return response
