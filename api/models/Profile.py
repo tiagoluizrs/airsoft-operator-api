@@ -2,6 +2,8 @@ from api.models import *
 
 class Patent(models.Model):
     name = models.CharField(max_length=10, unique=True, null=False, blank=False) 
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     
     def __str__(self):
         return self.name
@@ -9,6 +11,8 @@ class Patent(models.Model):
 class Team(models.Model):
     name = models.CharField(max_length=30, unique=True, null=False, blank=False)
     image = models.ImageField(upload_to='uploads/teams/', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     
     def __str__(self):
         return self.name
@@ -18,8 +22,8 @@ class Profile(models.Model):
     image = models.ImageField(upload_to='uploads/profiles/', null=True, blank=True)
     team = models.ForeignKey(Team, related_name='team_user', on_delete=models.CASCADE)  
     patent = models.ForeignKey(Patent, related_name='patent_user', on_delete=models.CASCADE)  
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     
     def __str__(self):
         return '{}'.format(self.user.username)

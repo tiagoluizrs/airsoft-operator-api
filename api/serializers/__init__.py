@@ -1,1 +1,2 @@
 from .WeaponSerializer import WeaponSerializer
+from .ProfileSerializer import ProfileSerializer
