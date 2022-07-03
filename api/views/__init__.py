@@ -1,0 +1,1 @@
+from .WeaponViews import WeaponViewSet
