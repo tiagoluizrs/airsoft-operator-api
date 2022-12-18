@@ -1,4 +1,6 @@
 from api.models.Profile import Profile
+from api.serializers.UserSerializer import UserSerializer
+from api.serializers.TeamSerializer import TeamSerializer
 from rest_framework import serializers
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -6,7 +8,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     full_name = serializers.CharField(source='user.get_full_name')
     team = serializers.CharField(source='team.name')
     patent = serializers.CharField(source='patent.name')
-    team_image = serializers.CharField(source='team.image')
+    team = TeamSerializer(many=False)
+    user = UserSerializer(many=False)
 
     class Meta:
         model = Profile
