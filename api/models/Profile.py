@@ -18,10 +18,11 @@ class Team(models.Model):
         return self.name
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     image = models.ImageField(upload_to='uploads/profiles/', null=True, blank=True)
-    team = models.ForeignKey(Team, related_name='team_user', on_delete=models.CASCADE)  
-    patent = models.ForeignKey(Patent, related_name='patent_user', on_delete=models.CASCADE)  
+    team = models.ForeignKey(Team, related_name='team_user', on_delete=models.CASCADE, null=True, blank=True)
+    patent = models.ForeignKey(Patent, related_name='patent_user', on_delete=models.CASCADE, null=True, blank=True)
+    code_confirm = models.CharField(max_length=6, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     
