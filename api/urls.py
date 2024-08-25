@@ -16,6 +16,7 @@ schema_view = get_swagger_view(title='Meu Operador API')
 router = SimpleRouter()
 
 router.register(r'weapon', views.WeaponViewSet, 'weapon')
+router.register(r'profile-weapon', views.ProfileWeaponViewSet, 'profile-weapon')
 router.register(r'profile', views.ProfileViewSet, 'profile')
 router.register(r'team', views.TeamViewSet, 'team')
 router.register(r'confirm', views.ConfirmView, basename='confirm')

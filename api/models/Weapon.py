@@ -51,12 +51,12 @@ class WeaponRating(models.Model):
 
 class FpsWeapon(models.Model):
     value = models.DecimalField(max_digits=5, decimal_places=2)
-    profileWeapon = models.ForeignKey(ProfileWeapon, related_name='profile_weapon_fps_weapon', on_delete=models.CASCADE)
+    profile_weapon = models.ForeignKey(ProfileWeapon, related_name='profile_weapon_fps_weapon', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     
     def __str__(self):
-        return self.profileWeapon.user.username
+        return self.profile_weapon.profile.user.username
 
 class Equipaments(models.Model):
     name = models.TextField()
