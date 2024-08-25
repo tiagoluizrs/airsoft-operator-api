@@ -8,6 +8,7 @@ from api.views.CustomObtainJSONWebToken import CustomTokenObtainPairView
 
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
+    TokenVerifyView
 )
 
 schema_view = get_swagger_view(title='Meu Operador API')
@@ -20,6 +21,7 @@ router.register(r'team', views.TeamViewSet, 'team')
 router.register(r'confirm', views.ConfirmView, basename='confirm')
 
 urlpatterns = [
+    path('api-token-verify/', TokenVerifyView.as_view()),
     path('api-token-refresh/', TokenRefreshView.as_view()),
     path('api-token-auth/', CustomTokenObtainPairView.as_view(), name='api_token_auth'),
     path('register/', UserRegistrationView.as_view(), name='user-registration'),
